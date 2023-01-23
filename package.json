@@ -6,19 +6,23 @@
   "type": "module",
   "files": [
     "build/src",
+    "build/stubs",
+    "build/providers",
     "build/index.d.ts",
     "build/index.js"
   ],
   "exports": {
     ".": "./build/index.js",
+    "./types": "./build/src/types.js",
     "./cors_middleware": "./build/src/cors_middleware.js",
-    "./types": "./build/src/types.js"
+    "./cors_provider": "./build/providers/cors_provider.js"
   },
   "scripts": {
     "pretest": "npm run lint",
     "test": "c8 npm run vscode:test",
     "clean": "del-cli build",
-    "compile": "npm run lint && npm run clean && tsc",
+    "copy:templates": "copyfiles \"stubs/**/*.stub\" build",
+    "compile": "npm run lint && npm run clean && tsc && npm run copy:templates",
     "build": "npm run compile",
     "release": "np",
     "version": "npm run build",
@@ -37,7 +41,7 @@
   "author": "adonisjs,virk",
   "license": "MIT",
   "devDependencies": {
-    "@adonisjs/http-server": "^6.5.0-0",
+    "@adonisjs/http-server": "^6.6.0-0",
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",
     "@japa/assert": "^1.3.4",
@@ -48,7 +52,8 @@
     "@types/node": "^18.0.0",
     "@types/supertest": "^2.0.12",
     "c8": "^7.12.0",
-    "del-cli": "^4.0.1",
+    "copyfiles": "^2.4.1",
+    "del-cli": "^5.0.0",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-adonis": "^3.0.3",
@@ -126,5 +131,9 @@
       "tests/**",
       ".yalc/**"
     ]
+  },
+  "adonisjs": {
+    "stubs": "./build/stubs",
+    "providers": ["@adonisjs/cors/cors_provider"]
   }
 }
