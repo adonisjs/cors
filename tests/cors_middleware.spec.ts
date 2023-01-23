@@ -17,7 +17,7 @@ import {
 } from '@adonisjs/http-server/factories'
 
 import { specFixtures } from './fixtures/cors.js'
-import { CorsMiddleware } from '../src/cors_middleware.js'
+import CorsMiddleware from '../src/cors_middleware.js'
 
 test.group('Cors', () => {
   test('{title}')

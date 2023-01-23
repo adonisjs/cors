@@ -11,6 +11,7 @@
   ],
   "exports": {
     ".": "./build/index.js",
+    "./cors_middleware": "./build/src/cors_middleware.js",
     "./types": "./build/src/types.js"
   },
   "scripts": {

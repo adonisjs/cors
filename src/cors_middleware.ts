@@ -30,7 +30,7 @@ const SIMPLE_EXPOSE_HEADERS = [
  * This is a functional middleware and shared among all requests. So make
  * sure not to set request specific instance properties.
  */
-export class CorsMiddleware {
+export default class CorsMiddleware {
   #config: CorsConfig
   #isEnabled: (ctx: HttpContext) => boolean
 
