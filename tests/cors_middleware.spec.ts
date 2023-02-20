@@ -10,11 +10,7 @@
 import supertest from 'supertest'
 import { test } from '@japa/runner'
 import { createServer } from 'node:http'
-import {
-  RequestFactory,
-  ResponseFactory,
-  HttpContextFactory,
-} from '@adonisjs/http-server/factories'
+import { RequestFactory, ResponseFactory, HttpContextFactory } from '@adonisjs/core/factories/http'
 
 import { specFixtures } from './fixtures/cors.js'
 import CorsMiddleware from '../src/cors_middleware.js'
