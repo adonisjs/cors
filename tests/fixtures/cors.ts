@@ -10,16 +10,10 @@
 import type { Assert } from '@japa/assert'
 import type { IncomingMessage } from 'node:http'
 
+import { defineConfig } from '../../index.js'
 import type { CorsConfig } from '../../src/types.js'
-const corsConfig = {
-  enabled: true,
-  origin: true,
-  methods: ['GET', 'PUT', 'POST'],
-  headers: true,
-  credentials: true,
-  maxAge: 90,
-  exposeHeaders: [],
-}
+
+const corsConfig = defineConfig({})
 
 const CORS_HEADERS = [
   'access-control-allow-origin',
@@ -431,6 +425,7 @@ export const specFixtures = [
     configureOptions(): CorsConfig {
       return Object.assign({}, corsConfig, {
         origin: true,
+        methods: ['GET', 'HEAD', 'POST', 'PUT'],
       })
     },
 
