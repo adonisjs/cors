@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import type { HttpContext } from '@adonisjs/http-server'
+import type { HttpContext } from '@adonisjs/core/http'
 
 type CorsOriginValues = boolean | string | string[]
 type CorsHeaderValues = CorsOriginValues

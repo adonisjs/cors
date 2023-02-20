@@ -24,6 +24,7 @@ test.group('Cors', () => {
     .with(specFixtures)
     .run(async ({ assert }, fixture) => {
       let nextCalled = false
+
       const server = createServer(async (req, res) => {
         const cors = new CorsMiddleware(fixture.configureOptions())
         fixture.configureRequest(req)

@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-import { Application } from '@adonisjs/application'
+import { ApplicationService } from '@adonisjs/core/types'
 import CorsMiddleware from '../src/cors_middleware.js'
 
 export default class CorsProvider {
-  constructor(protected app: Application<any>) {}
+  constructor(protected app: ApplicationService) {}
 
   register() {
     this.app.container.bind(CorsMiddleware, () => {

@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
  */
 
-import { HttpContext } from '@adonisjs/http-server'
-import { NextFn } from '@adonisjs/http-server/types'
+import { HttpContext } from '@adonisjs/core/http'
+import type { NextFn } from '@adonisjs/core/types/http'
 import type { CorsConfig } from './types.js'
 
 /**
