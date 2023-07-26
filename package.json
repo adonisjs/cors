@@ -19,6 +19,9 @@
     "./cors_middleware": "./build/src/cors_middleware.js",
     "./cors_provider": "./build/providers/cors_provider.js"
   },
+  "engines": {
+    "node": ">=18.16.0"
+  },
   "scripts": {
     "pretest": "npm run lint",
     "test": "c8 npm run vscode:test",
