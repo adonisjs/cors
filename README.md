@@ -2,7 +2,7 @@
 
 <br />
 
-[![gh-workflow-image]][gh-workflow-url] [![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url] [![snyk-image]][snyk-url]
+[![gh-workflow-image]][gh-workflow-url] [![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url]
 
 ## Introduction
 CORS middleware to manage CORS policies inside an AdonisJS project.
@@ -31,6 +31,3 @@ AdonisJS CORS middleware is open-sourced software licensed under the [MIT licens
 
 [license-url]: LICENSE.md
 [license-image]: https://img.shields.io/github/license/adonisjs/cors?style=for-the-badge
-
-[snyk-image]: https://img.shields.io/snyk/vulnerabilities/github/adonisjs/cors?label=Snyk%20Vulnerabilities&style=for-the-badge
-[snyk-url]: https://snyk.io/test/github/adonisjs/cors?targetFile=package.json "snyk"
