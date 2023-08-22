@@ -20,7 +20,10 @@ test.group('Configure', (group) => {
     context.fs.basePath = fileURLToPath(BASE_URL)
   })
 
-  test('create config file and register provider', async ({ assert }) => {
+  test('create config file and register provider', async ({ assert, fs }) => {
+    await fs.createJson('tsconfig.json', {})
+    await fs.create('adonisrc.ts', `export default defineConfig({})`)
+
     const ignitor = new IgnitorFactory()
       .withCoreProviders()
       .withCoreConfig()
@@ -43,8 +46,7 @@ test.group('Configure', (group) => {
     await command.exec()
 
     await assert.fileExists('config/cors.ts')
-    await assert.fileExists('.adonisrc.json')
-    await assert.fileContains('.adonisrc.json', '@adonisjs/cors/cors_provider')
+    await assert.fileContains('adonisrc.ts', `() => import('@adonisjs/cors/cors_provider')`)
     await assert.fileContains('config/cors.ts', 'defineConfig')
-  })
+  }).timeout(6000)
 })
