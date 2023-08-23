@@ -16,6 +16,19 @@ export async function configure(command: Configure) {
   await command.publishStub('cors/config.stub')
 
   const codemods = await command.createCodemods()
+
+  /**
+   * Register middleware
+   */
+  await codemods.registerMiddleware('server', [
+    {
+      path: '@adonisjs/cors/cors_middleware',
+    },
+  ])
+
+  /**
+   * Register service provider
+   */
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@adonisjs/cors/cors_provider')
   })
