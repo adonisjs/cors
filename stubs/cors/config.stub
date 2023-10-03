@@ -9,7 +9,7 @@ import { defineConfig } from '@adonisjs/cors'
  *
  * https://docs.adonisjs.com/guides/security/cors
  */
-export default defineConfig({
+const corsConfig = defineConfig({
   enabled: true,
   origin: true,
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
@@ -18,3 +18,5 @@ export default defineConfig({
   credentials: true,
   maxAge: 90,
 })
+
+export default corsConfig
