@@ -5,7 +5,9 @@
   "main": "build/index.js",
   "type": "module",
   "files": [
-    "build"
+    "build",
+    "!build/bin",
+    "!build/tests"
   ],
   "exports": {
     ".": "./build/index.js",
@@ -22,7 +24,9 @@
     "clean": "del-cli build",
     "typecheck": "tsc --noEmit",
     "copy:templates": "copyfiles --up 1 \"stubs/**/*.stub\" build",
-    "compile": "npm run lint && npm run clean && tsup-node && npm run copy:templates",
+    "precompile": "npm run lint && npm run clean",
+    "compile": "tsup-node && tsc --emitDeclarationOnly --declaration",
+    "postcompile": "npm run copy:templates",
     "build": "npm run compile",
     "release": "np",
     "version": "npm run build",
@@ -116,7 +120,8 @@
     "outDir": "./build",
     "clean": true,
     "format": "esm",
-    "dts": true,
+    "dts": false,
+    "sourcemap": true,
     "target": "esnext"
   }
 }
