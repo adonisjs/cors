@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
+import { stubsRoot } from './stubs/main.js'
 import type Configure from '@adonisjs/core/commands/configure'
 
 /**
  * Configures the package
  */
 export async function configure(command: Configure) {
-  await command.publishStub('cors/config.stub')
-
   const codemods = await command.createCodemods()
+  await codemods.makeUsingStub(stubsRoot, 'cors/config.stub', {})
 
   /**
    * Register middleware
