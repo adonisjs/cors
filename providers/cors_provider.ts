@@ -9,6 +9,7 @@
 
 import { ApplicationService } from '@adonisjs/core/types'
 import CorsMiddleware from '../src/cors_middleware.js'
+import { defineConfig } from '../src/define_config.js'
 
 /**
  * Cors provider configures the cors middleware using the config
@@ -19,7 +20,7 @@ export default class CorsProvider {
 
   register() {
     this.app.container.bind(CorsMiddleware, () => {
-      const config = this.app.config.get<any>('cors', {})
+      const config = this.app.config.get<any>('cors', defineConfig({}))
       return new CorsMiddleware(config)
     })
   }
