@@ -27,7 +27,7 @@ test.group('Cors provider', () => {
           },
         },
         rcFileContents: {
-          providers: ['../../providers/cors_provider.js'],
+          providers: [() => import('../providers/cors_provider.js')],
         },
       })
       .create(BASE_URL, {
