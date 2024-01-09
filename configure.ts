@@ -15,7 +15,7 @@ import type Configure from '@adonisjs/core/commands/configure'
  */
 export async function configure(command: Configure) {
   const codemods = await command.createCodemods()
-  await codemods.makeUsingStub(stubsRoot, 'cors/config.stub', {})
+  await codemods.makeUsingStub(stubsRoot, 'config/cors.stub', {})
 
   /**
    * Register middleware
