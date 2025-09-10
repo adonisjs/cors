@@ -24,11 +24,6 @@ import { defineConfig } from '../src/define_config.ts'
  */
 export default class CorsProvider {
   /**
-   * The application service instance
-   */
-  protected app: ApplicationService
-
-  /**
    * Create a new instance of CorsProvider
    *
    * @param app - The application service instance
