@@ -7,10 +7,21 @@
  * file that was distributed with this source code.
  */
 
-import { type CorsConfig } from './types.ts'`
+import { type CorsConfig } from './types.ts'
 
 /**
- * Define config for the cors middleware
+ * Define config for the cors middleware with default values
+ *
+ * @param config - Partial CORS configuration to merge with defaults
+ *
+ * @example
+ * ```ts
+ * const corsConfig = defineConfig({
+ *   origin: ['http://localhost:3000', 'https://example.com'],
+ *   methods: ['GET', 'POST'],
+ *   credentials: false
+ * })
+ * ```
  */
 export function defineConfig(config: Partial<CorsConfig>): CorsConfig {
   return {

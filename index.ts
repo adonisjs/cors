@@ -7,6 +7,6 @@
  * file that was distributed with this source code.
  */
 
-export { configure } from './configure.ts'`
-export { stubsRoot } from './stubs/main.ts'`
-export { defineConfig } from './src/define_config.ts'`
+export { configure } from './configure.ts'
+export { stubsRoot } from './stubs/main.ts'
+export { defineConfig } from './src/define_config.ts'

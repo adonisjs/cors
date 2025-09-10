@@ -9,7 +9,7 @@
 
 import { type HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
-import type { CorsConfig } from './types.ts'`
+import type { CorsConfig } from './types.ts'
 
 /**
  * List of default exposed headers.
@@ -29,18 +29,46 @@ const SIMPLE_EXPOSE_HEADERS = [
  *
  * This is a functional middleware and shared among all requests. So make
  * sure not to set request specific instance properties.
+ *
+ * @example
+ * ```ts
+ * const corsMiddleware = new CorsMiddleware({
+ *   enabled: true,
+ *   origin: ['http://localhost:3000'],
+ *   methods: ['GET', 'POST'],
+ *   headers: true,
+ *   credentials: false,
+ *   maxAge: 90
+ * })
+ *
+ * await corsMiddleware.handle(ctx, next)
+ * ```
  */
 export default class CorsMiddleware {
+  /**
+   * The normalized CORS configuration
+   */
   #config: CorsConfig
+
+  /**
+   * Function to check if CORS is enabled for the current request
+   */
   #isEnabled: (ctx: HttpContext) => boolean
 
+  /**
+   * Create a new instance of CorsMiddleware
+   *
+   * @param config - The CORS configuration object
+   */
   constructor(config: CorsConfig) {
     this.#config = this.#normalizeConfig(config)
     this.#isEnabled = this.#computeIsEnabled()
   }
 
   /**
-   * Normlizes config object
+   * Normalizes the config object by processing expose headers
+   *
+   * @param config - The original CORS configuration
    */
   #normalizeConfig(config: CorsConfig) {
     config.exposeHeaders = config.exposeHeaders.map((header) => header.toLowerCase())
@@ -59,7 +87,7 @@ export default class CorsMiddleware {
   }
 
   /**
-   * Computes the isEnabled callback
+   * Computes the isEnabled callback based on the config
    */
   #computeIsEnabled() {
     return typeof this.#config.enabled === 'function'
@@ -72,6 +100,9 @@ export default class CorsMiddleware {
    * user config.
    *
    * Origin match is always case sensitive
+   *
+   * @param origin - The origin from the request header
+   * @param ctx - The HTTP context
    */
   #computeResponseOrigin(origin: string, ctx: HttpContext): string | null {
     let allowedOrigins = this.#config.origin
@@ -144,6 +175,9 @@ export default class CorsMiddleware {
    *
    * The array items are casted to lowercase for case insensitive
    * match.
+   *
+   * @param headers - The requested headers from the client
+   * @param ctx - The HTTP context
    */
   #computedAllowedHeaders(headers: string[], ctx: HttpContext): string[] {
     let allowedHeaders = this.#config.headers
@@ -182,6 +216,9 @@ export default class CorsMiddleware {
 
   /**
    * Sets the `Access-Control-Allow-Origin` header
+   *
+   * @param response - The HTTP response object
+   * @param allowedOrigin - The allowed origin to set
    */
   #setOrigin(response: HttpContext['response'], allowedOrigin: string) {
     response.header('Access-Control-Allow-Origin', allowedOrigin)
@@ -191,6 +228,8 @@ export default class CorsMiddleware {
    * Setting `Access-Control-Expose-Headers` headers, when custom headers
    * are defined. If no custom headers are defined, then simple response
    * headers are used instead.
+   *
+   * @param response - The HTTP response object
    */
   #setExposedHeaders(response: HttpContext['response']) {
     if (this.#config.exposeHeaders.length) {
@@ -201,6 +240,8 @@ export default class CorsMiddleware {
   /**
    * Allows `Access-Control-Allow-Credentials` when enabled inside the user
    * config.
+   *
+   * @param response - The HTTP response object
    */
   #setCredentials(response: HttpContext['response']) {
     if (this.#config.credentials === true) {
@@ -210,6 +251,8 @@ export default class CorsMiddleware {
 
   /**
    * Set `Access-Control-Allow-Methods` header.
+   *
+   * @param response - The HTTP response object
    */
   #setAllowMethods(response: HttpContext['response']) {
     response.header('Access-Control-Allow-Methods', this.#config.methods.join(','))
@@ -217,6 +260,9 @@ export default class CorsMiddleware {
 
   /**
    * Set `Access-Control-Allow-Headers` header.
+   *
+   * @param response - The HTTP response object
+   * @param allowedHeaders - Array of allowed header names
    */
   #setAllowHeaders(response: HttpContext['response'], allowedHeaders: string[]) {
     response.header('Access-Control-Allow-Headers', allowedHeaders.join(','))
@@ -224,6 +270,8 @@ export default class CorsMiddleware {
 
   /**
    * Set `Access-Control-Max-Age` header.
+   *
+   * @param response - The HTTP response object
    */
   #setMaxAge(response: HttpContext['response']) {
     if (this.#config.maxAge) {
@@ -233,6 +281,8 @@ export default class CorsMiddleware {
 
   /**
    * Ends the preflight request with 204 status code
+   *
+   * @param response - The HTTP response object
    */
   #endPreFlight(response: HttpContext['response']) {
     response.status(204).send(null)
@@ -241,6 +291,14 @@ export default class CorsMiddleware {
   /**
    * Handle HTTP request for CORS. This method is binded as a before hook
    * to the HTTP server.
+   *
+   * @param ctx - The HTTP context containing request and response
+   * @param next - The next function to call in the middleware chain
+   *
+   * @example
+   * ```ts
+   * await corsMiddleware.handle(ctx, next)
+   * ```
    */
   async handle(ctx: HttpContext, next: NextFn) {
     /**

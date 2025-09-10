@@ -35,8 +35,28 @@ export type CorsConfig = {
    * Cors HTTP methods to allow
    */
   methods: string[]
+
+  /**
+   * Headers to allow for CORS requests.
+   *
+   * - The value can be a boolean to allow/disallow all headers
+   * - An explicit list of headers defined as an array of strings
+   * - Or a callback function to define headers by inspecting the current request
+   */
   headers: CorsHeaderValues | ((headers: string[], ctx: HttpContext) => CorsHeaderValues)
+
+  /**
+   * Headers to expose to the client
+   */
   exposeHeaders: string[]
+
+  /**
+   * Whether to allow credentials (cookies, authorization headers, etc.)
+   */
   credentials: boolean
+
+  /**
+   * Maximum age in seconds for preflight cache
+   */
   maxAge: number
 }
