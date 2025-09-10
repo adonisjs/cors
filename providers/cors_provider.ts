@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { ApplicationService } from '@adonisjs/core/types'
+import { type ApplicationService } from '@adonisjs/core/types'
 import CorsMiddleware from '../src/cors_middleware.js'
 import { defineConfig } from '../src/define_config.js'
 
