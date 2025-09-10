@@ -9,7 +9,7 @@
 
 import { type HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
-import type { CorsConfig } from './types.js'
+import type { CorsConfig } from './types.ts'`
 
 /**
  * List of default exposed headers.

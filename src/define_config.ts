@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { type CorsConfig } from './types.js'
+import { type CorsConfig } from './types.ts'`
 
 /**
  * Define config for the cors middleware

@@ -9,7 +9,7 @@
 
 import { test } from '@japa/runner'
 import { IgnitorFactory } from '@adonisjs/core/factories'
-import CorsMiddleware from '../src/cors_middleware.js'
+import CorsMiddleware from '../src/cors_middleware.ts'`
 
 const BASE_URL = new URL('./tmp/', import.meta.url)
 

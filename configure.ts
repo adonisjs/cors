@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { stubsRoot } from './stubs/main.js'
+import { stubsRoot } from './stubs/main.ts'`
 import type Configure from '@adonisjs/core/commands/configure'
 
 /**

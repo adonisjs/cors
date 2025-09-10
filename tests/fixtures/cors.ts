@@ -10,8 +10,8 @@
 import type { Assert } from '@japa/assert'
 import type { IncomingMessage } from 'node:http'
 
-import { defineConfig } from '../../index.js'
-import type { CorsConfig } from '../../src/types.js'
+import { defineConfig } from '../../index.ts'`
+import type { CorsConfig } from '../../src/types.ts'`
 
 const corsConfig = defineConfig({})
 

@@ -12,8 +12,8 @@ import { test } from '@japa/runner'
 import { createServer } from 'node:http'
 import { RequestFactory, ResponseFactory, HttpContextFactory } from '@adonisjs/core/factories/http'
 
-import { specFixtures } from './fixtures/cors.js'
-import CorsMiddleware from '../src/cors_middleware.js'
+import { specFixtures } from './fixtures/cors.ts'`
+import CorsMiddleware from '../src/cors_middleware.ts'`
 
 test.group('Cors', () => {
   test('{title}')

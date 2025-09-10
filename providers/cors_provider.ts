@@ -8,8 +8,8 @@
  */
 
 import { type ApplicationService } from '@adonisjs/core/types'
-import CorsMiddleware from '../src/cors_middleware.js'
-import { defineConfig } from '../src/define_config.js'
+import CorsMiddleware from '../src/cors_middleware.ts'`
+import { defineConfig } from '../src/define_config.ts'`
 
 /**
  * Cors provider configures the cors middleware using the config
