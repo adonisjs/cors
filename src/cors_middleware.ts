@@ -359,8 +359,10 @@ export default class CorsMiddleware {
 
       /**
        * Finding if all request `Access-Control-Request-Headers` falls under the
-       * list of allowed headers inside user config
+       * list of allowed headers inside user config. A Set keeps the lookup
+       * linear, since the request headers list is controlled by the client.
        */
+      const allowedHeadersSet = new Set(allowedHeaders)
       const headersMatches = (requestHeaders as string[]).every((header) => {
         if (header === 'origin') {
           return true
@@ -369,7 +371,7 @@ export default class CorsMiddleware {
         /**
          * Doing case insenstive match
          */
-        return allowedHeaders.indexOf(header.toLowerCase()) > -1
+        return allowedHeadersSet.has(header.toLowerCase())
       })
 
       /**
