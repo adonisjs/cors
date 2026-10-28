@@ -49,6 +49,7 @@ test.group('Configure', (group) => {
     await assert.fileExists('config/cors.ts')
     await assert.fileContains('adonisrc.ts', `() => import('@adonisjs/cors/cors_provider')`)
     await assert.fileContains('config/cors.ts', 'defineConfig')
+    await assert.fileContains('config/cors.ts', 'origin: app.inDev ? true : []')
     await assert.fileContains('start/kernel.ts', `() => import('@adonisjs/cors/cors_middleware')`)
   }).timeout(1000 * 10)
 })

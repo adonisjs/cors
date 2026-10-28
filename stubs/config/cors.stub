@@ -1,6 +1,7 @@
 {{{
   exports({ to: app.configPath('cors.ts') })
 }}}
+import app from '@adonisjs/core/services/app'
 import { defineConfig } from '@adonisjs/cors'
 
 /**
@@ -11,7 +12,13 @@ import { defineConfig } from '@adonisjs/cors'
  */
 const corsConfig = defineConfig({
   enabled: true,
-  origin: true,
+
+  /**
+   * Allow every origin in development. In production, list the allowed
+   * origins explicitly. The empty default blocks all cross-origin requests.
+   */
+  origin: app.inDev ? true : [],
+
   methods: ['GET', 'HEAD', 'POST', 'PUT', 'DELETE'],
   headers: true,
   exposeHeaders: [],
